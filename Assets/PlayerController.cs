@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     public int forcaEmX;
+    public int forcaEmZ = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        rb.AddForce(0, 0, forcaEmZ*Time.fixedDeltaTime);
         if (Input.GetKey("a") == true)
         {     
             rb.AddForce(-forcaEmX* Time.fixedDeltaTime, 0, 0);
