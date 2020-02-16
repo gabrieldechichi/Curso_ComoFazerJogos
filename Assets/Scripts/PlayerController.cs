@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public int forcaEmX;
     public int forcaEmZ = 50;
+    public float velocidadeMaximaZ = 200;
     public GameController gameController;
 
     // Start is called before the first frame update
@@ -18,7 +19,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(0, 0, forcaEmZ*Time.fixedDeltaTime);
+        if (rb.velocity.z < velocidadeMaximaZ)
+        {
+            rb.AddForce(0, 0, forcaEmZ * Time.fixedDeltaTime);
+        }
+
+        //Debug.Log("Velocidae em Z: " + rb.velocity.z.ToString());
+        
         if (Input.GetKey("a") == true)
         {     
             rb.AddForce(-forcaEmX* Time.fixedDeltaTime, 0, 0);
@@ -38,6 +45,14 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.CompareTag("Inimigo") == true)
         {
             gameController.GameOver();
+        }
+    }
+
+    void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.CompareTag("Planeta"))
+        {
+            gameController.VencerJogo();
         }
     }
 }

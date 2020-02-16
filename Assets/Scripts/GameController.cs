@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     Vector3 posicaoInicial;
     public float divisorDaPontuacao;
     public GameObject painelGameOver;
+    public GameObject painelVenceuJogo;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,11 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         painelGameOver.SetActive(true);
-        Invoke("RecarregarLevel", 2);
+    }
+
+    public void VencerJogo()
+    {
+        painelVenceuJogo.SetActive(true);
     }
 
     public void RecarregarLevel()
