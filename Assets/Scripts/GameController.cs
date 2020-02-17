@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     public float divisorDaPontuacao;
     public GameObject painelGameOver;
     public GameObject painelVenceuJogo;
+
+    public AudioClip sfxVenceuJogo;
+    public AudioController audioController;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            return;
+        }
+
         Vector3 distanciaPercorrida = player.transform.position - posicaoInicial;
         float pontuacao = distanciaPercorrida.z / divisorDaPontuacao;
         textoPontuacao.text = pontuacao.ToString("0");
@@ -33,6 +41,7 @@ public class GameController : MonoBehaviour
 
     public void VencerJogo()
     {
+        audioController.ToqueSFX(sfxVenceuJogo);
         painelVenceuJogo.SetActive(true);
     }
 

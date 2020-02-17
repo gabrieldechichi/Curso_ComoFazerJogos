@@ -15,6 +15,10 @@ public class SeguirJogador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerController == null)
+        {
+            return;
+        }
         this.transform.position = playerController.transform.position + distanciaProJogador;
     }
 }

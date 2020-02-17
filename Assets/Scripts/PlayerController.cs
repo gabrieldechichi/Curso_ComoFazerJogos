@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int forcaEmZ = 50;
     public float velocidadeMaximaZ = 200;
     public GameController gameController;
+    public GameObject fxExplosaoPrefab; 
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.collider.CompareTag("Inimigo") == true)
         {
+            GameObject.Instantiate(fxExplosaoPrefab, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
             gameController.GameOver();
         }
     }
