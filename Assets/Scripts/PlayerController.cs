@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public int forcaEmX;
     public int forcaEmZ = 50;
     public float velocidadeMaximaZ = 200;
+    public float anguloAlvo = 30;
+    public float velocidadeDeRotacao = 3;
     public GameController gameController;
     public GameObject fxExplosaoPrefab; 
 
@@ -30,12 +32,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("a") == true)
         {     
             rb.AddForce(-forcaEmX* Time.fixedDeltaTime, 0, 0);
-            Debug.Log("O A esta apertado");
-        }
 
-        if (Input.GetKey("d") == true)
+            Quaternion rotacaoAtual = rb.rotation;
+            Quaternion rotacaoAlvo = Quaternion.Euler(0, 0, anguloAlvo);
+            Quaternion novaRotacao = Quaternion.Lerp(rotacaoAtual, rotacaoAlvo, Time.fixedDeltaTime * velocidadeDeRotacao);
+            rb.MoveRotation(novaRotacao);
+        }
+        else if (Input.GetKey("d") == true)
         {
             rb.AddForce(forcaEmX*Time.fixedDeltaTime, 0, 0);
+
+            Quaternion rotacaoAtual = rb.rotation;
+            Quaternion rotacaoAlvo = Quaternion.Euler(0, 0, -anguloAlvo);
+            Quaternion novaRotacao = Quaternion.Lerp(rotacaoAtual, rotacaoAlvo, Time.fixedDeltaTime * velocidadeDeRotacao);
+            rb.MoveRotation(novaRotacao);
+        }
+        else
+        {
+            Quaternion rotacaoAtual = rb.rotation;
+            Quaternion rotacaoAlvo = Quaternion.Euler(0, 0, 0);
+            Quaternion novaRotacao = Quaternion.Lerp(rotacaoAtual, rotacaoAlvo, Time.fixedDeltaTime * velocidadeDeRotacao);
+            rb.MoveRotation(novaRotacao);
         }
     }
 

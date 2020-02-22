@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public Text textoPontuacao;
     public PlayerController player;
+    public LevaNaveAoPlaneta levaNaveAoPlaneta;
     Vector3 posicaoInicial;
     public float divisorDaPontuacao;
     public GameObject painelGameOver;
@@ -41,6 +42,7 @@ public class GameController : MonoBehaviour
 
     public void VencerJogo()
     {
+        levaNaveAoPlaneta.LeveNaveAoPlaneta();
         audioController.ToqueSFX(sfxVenceuJogo);
         painelVenceuJogo.SetActive(true);
     }
@@ -48,5 +50,10 @@ public class GameController : MonoBehaviour
     public void RecarregarLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SairDoJogo()
+    {
+        Application.Quit();
     }
 }
